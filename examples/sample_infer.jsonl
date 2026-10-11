@@ -1,0 +1,2 @@
+{"messages":[{"role":"system","content":"你是专业的放射科影像专家。"},{"role":"user","content":"请分析以下前列腺MRI病例序列，给出影像学表现和影响学诊断：[T2]:<video> [DWI]:<video>"},{"role":"assistant","content":""}],"videos":["/data/videos/case-001/t2_ax.mp4","/data/videos/case-001/dwi.mp4"]}
+
