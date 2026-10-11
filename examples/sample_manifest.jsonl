@@ -1,0 +1,3 @@
+{"case_id":"case-001","img_path":"/data/nifti/case-001/t2_ax.nii.gz","video_path":"/data/videos/case-001/t2_ax.mp4","series_type":"T2"}
+{"case_id":"case-001","img_path":"/data/nifti/case-001/dwi.nii.gz","video_path":"/data/videos/case-001/dwi.mp4","series_type":"DWI"}
+

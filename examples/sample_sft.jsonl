@@ -1,0 +1,2 @@
+{"messages":[{"role":"system","content":"你是专业的放射科影像专家。"},{"role":"user","content":"请分析以下前列腺MRI病例序列：[T2]:<video> [DWI]:<video>"},{"role":"assistant","content":"{\"结构化信息\": {\"PI-RADS评分\": 3}, \"影像学表现\": \"合成示例，无真实患者信息\", \"影像学诊断\": \"合成示例\", \"其他发现\": null}"}],"videos":["/data/videos/case-001/t2_ax.mp4","/data/videos/case-001/dwi.mp4"]}
+

@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "profound-mri"
+version = "0.1.0"
+description = "Prostate MRI data preparation and VLM training utilities"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "nibabel>=5.1",
+  "numpy>=1.24",
+  "opencv-python-headless>=4.8",
+  "pandas>=2.0",
+  "pydicom>=2.4",
+  "SimpleITK>=2.3",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+reports = ["openpyxl>=3.1", "vllm>=0.6"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+profound-dicom-to-nifti = "profound.data.dicom_to_nifti:cli"
+profound-nifti-to-video = "profound.data.nifti_to_video:cli"
+profound-build-manifest = "profound.data.build_manifest:cli"
+profound-extract-reports = "profound.data.extract_reports:cli"
+profound-build-sft = "profound.data.build_sft:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
