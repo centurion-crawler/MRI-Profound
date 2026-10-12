@@ -1,0 +1,3 @@
+{"case_id":"case-012","series_type":"T2W","img_path":"/data/prepared/nifti/case-012/t2w.nii.gz","video_path":"/data/prepared/videos/case-012/t2w.mp4"}
+{"case_id":"case-012","series_type":"DWI","img_path":"/data/prepared/nifti/case-012/dwi.nii.gz","video_path":"/data/prepared/videos/case-012/dwi.mp4"}
+{"case_id":"case-012","series_type":"ADC","img_path":"/data/prepared/nifti/case-012/adc.nii.gz","video_path":"/data/prepared/videos/case-012/adc.mp4"}

@@ -5,6 +5,8 @@ __pycache__/
 .venv/
 venv/
 .env
+*.egg-info/
+uv.lock
 
 # Models, checkpoints, data and generated artifacts
 /data/
@@ -29,4 +31,5 @@ venv/
 *.xls
 *.jsonl
 !examples/*.jsonl
+!examples/**/*.jsonl
 

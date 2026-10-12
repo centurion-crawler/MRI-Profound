@@ -1,0 +1,23 @@
+{
+  "case_id": "case-012",
+  "series": [
+    {
+      "series_type": "T2W",
+      "dicom_instances": 20,
+      "nifti_path": "/data/prepared/nifti/case-012/t2w.nii.gz",
+      "video_path": "/data/prepared/videos/case-012/t2w.mp4"
+    },
+    {
+      "series_type": "DWI",
+      "dicom_instances": 20,
+      "nifti_path": "/data/prepared/nifti/case-012/dwi.nii.gz",
+      "video_path": "/data/prepared/videos/case-012/dwi.mp4"
+    },
+    {
+      "series_type": "ADC",
+      "dicom_instances": 20,
+      "nifti_path": "/data/prepared/nifti/case-012/adc.nii.gz",
+      "video_path": "/data/prepared/videos/case-012/adc.mp4"
+    }
+  ]
+}

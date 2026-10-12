@@ -87,8 +87,56 @@ profound-build-sft \
 ```
 
 See [examples/sample_manifest.jsonl](examples/sample_manifest.jsonl) and
-[examples/sample_sft.jsonl](examples/sample_sft.jsonl) for the schemas. The
+[examples/sample_infer.jsonl](examples/sample_infer.jsonl) for the schemas. The
 examples are synthetic.
+
+### Prepare one case in multiple formats
+
+`profound-prepare-single-case` turns one directory of DICOM series into all
+formats needed by the pipeline. It recognizes directory names containing
+`T2`/`T2W`, `DWI`, `ADC` or `DCE`, replaces the input name with the supplied
+de-identified `case_id`, and does not copy DICOM metadata into its JSON files.
+
+```bash
+profound-prepare-single-case \
+  --case-dir /path/to/deidentified_case \
+  --case-id case-012 \
+  --output-root outputs/case-012
+```
+
+The command produces five complementary preprocessing representations:
+
+```text
+outputs/case-012/
+├── nifti/case-012/       # 3-D volumes: t2w.nii.gz, dwi.nii.gz, adc.nii.gz
+├── videos/case-012/      # percentile-normalized axial MP4 sequences
+├── manifests/            # one JSONL row per MRI sequence
+├── inference/            # one multimodal SWIFT inference record
+└── metadata/             # de-identified conversion summary
+```
+
+If a directory name is not recognizable, provide one or more explicit
+mappings. Mapping labels may contain only letters, digits, `_` and `-`:
+
+```bash
+profound-prepare-single-case \
+  --case-dir /path/to/deidentified_case \
+  --case-id case-012 \
+  --output-root outputs/case-012 \
+  --series-map axial_t2=T2W \
+  --series-map diffusion_b1400=DWI \
+  --series-map apparent_diffusion=ADC
+```
+
+See the de-identified output schemas in
+[examples/single_case/sample_manifest.jsonl](examples/single_case/sample_manifest.jsonl)
+and
+[examples/single_case/sample_inference.jsonl](examples/single_case/sample_inference.jsonl).
+The corresponding de-identified conversion summary is
+[examples/single_case/sample_metadata.json](examples/single_case/sample_metadata.json).
+These examples were generated from a three-sequence T2W/DWI/ADC case after
+replacing its identifier and paths. The repository does not include the source
+DICOM, derived NIfTI or MP4 files.
 
 ## Training and inference
 
@@ -109,6 +157,34 @@ bash scripts/infer.sh
 Use `scripts/train_full.sh` for full-parameter SFT and
 `scripts/merge_lora.sh` to merge an adapter. Environment variables and defaults
 are documented in [configs/profound.env.example](configs/profound.env.example).
+
+### Single-sample inference
+
+The following command preprocesses a DICOM case and immediately runs SWIFT
+inference. `CASE_ID` must be a non-identifying value. `ADAPTER` is optional;
+omit it when `MODEL` already points to a merged or fully fine-tuned model.
+
+```bash
+MODEL=/path/to/Qwen3-VL-8B-Instruct \
+ADAPTER=/path/to/checkpoint \
+CASE_DIR=/path/to/deidentified_case \
+CASE_ID=case-012 \
+OUTPUT_DIR=outputs/single_case/case-012 \
+bash scripts/infer_single.sh
+```
+
+The prediction is written to
+`outputs/single_case/case-012/prediction.jsonl`. Optional controls include
+`VIDEO_FPS`, `VIDEO_MAX_PIXELS`, `FPS_MAX_FRAMES`, `MAX_NEW_TOKENS`,
+`INFER_BACKEND`, `OVERWRITE=true`, and `RESAMPLE_ON_ERROR=true`. For directory
+names that do not contain recognizable modality labels, pass a space-separated
+mapping string:
+
+```bash
+SERIES_MAP="axial_t2=T2W diffusion_b1400=DWI apparent_diffusion=ADC" \
+MODEL=/path/to/model CASE_DIR=/path/to/case CASE_ID=case-012 \
+bash scripts/infer_single.sh
+```
 
 ## Expected SWIFT record
 

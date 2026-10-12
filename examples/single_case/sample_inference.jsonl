@@ -1,0 +1,1 @@
+{"messages":[{"role":"system","content":"你是专业的放射科影像专家。请根据前列腺MRI序列，严格按照医学标准生成结构化信息、影像学表现和影像学诊断。"},{"role":"user","content":"请分析以下前列腺MRI病例序列：[T2W]:<video> [DWI]:<video> [ADC]:<video>"},{"role":"assistant","content":""}],"videos":["/data/prepared/videos/case-012/t2w.mp4","/data/prepared/videos/case-012/dwi.mp4","/data/prepared/videos/case-012/adc.mp4"],"case_id":"case-012"}

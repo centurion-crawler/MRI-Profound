@@ -25,6 +25,7 @@ dev = ["pytest>=8", "ruff>=0.6"]
 [project.scripts]
 profound-dicom-to-nifti = "profound.data.dicom_to_nifti:cli"
 profound-nifti-to-video = "profound.data.nifti_to_video:cli"
+profound-prepare-single-case = "profound.data.prepare_single_case:cli"
 profound-build-manifest = "profound.data.build_manifest:cli"
 profound-extract-reports = "profound.data.extract_reports:cli"
 profound-build-sft = "profound.data.build_sft:cli"
